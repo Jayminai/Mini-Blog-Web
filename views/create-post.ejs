@@ -1,0 +1,28 @@
+<%- include('partials/header') %>
+<main class="container">
+<% if (!locals.title && !locals.body) { %>
+    <div class="container">
+        <h1>Create a Post</h1>
+        <p>Write a new blog post and share it with the world.</p>
+        <form action="/create-post" method="POST">
+            <div class="mb-3">
+                <label for="title" class="form-label">Title</label>
+                <input type="text" class="form-control" id="title" name="title">
+            </div>
+            <div class="mb-3">
+                <label for="body" class="form-label">Body <i class="fas fa-pencil-alt"></i></label>
+                <textarea class="form-control" id="body" name="body" rows="10" placeholder="Write your post here" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+<% }else { %>
+    <div class="container">
+        <h1 class="blog-heading"><%= title %></h1>
+        <p class="blog-body">
+            <%= body %>
+        </p>
+    </div>
+<% } %>
+</main>
+<%- include('partials/footer') %>
