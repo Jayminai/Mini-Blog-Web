@@ -1,38 +1,27 @@
 <%- include('partials/header') %>
-<main>
-    <div class="container">
-        <!-- Page Heading -->
-        <h1 class="page-heading">Welcome to My Blog</h1>
-    
-        <!-- Intro Text -->
-        <p class="intro-text">
-          A blog is more than just a space for words. It's a platform for expression, creativity, and connection. Here, we share ideas, stories, and inspiration that can ignite change. Whether you're here to find something new or just relax with some interesting content, there's always something for everyone.
-        </p>
-    
-        <!-- Quote Section -->
-        <blockquote class="quote">
-          "The only limit to our realization of tomorrow is our doubts of today."
-        </blockquote>
-        <p class="quote-author">- Franklin D. Roosevelt</p>
-    
-        <!-- Main Content Section -->
-        <div class="main-content">
-          <p>
-            Blogging is an incredible way to engage with the world. Whether you're writing about your passions, sharing your knowledge, or simply telling stories, blogs offer a space where your thoughts can come to life. It’s an outlet for creativity, and in today's digital age, it connects us with people who share our interests from all over the globe.
-          </p>
-          <p>
-            At its core, blogging is about communication. It's about expressing your thoughts, learning from others, and fostering a community. It can be as personal or professional as you like. There’s no limit to what you can write about, and that's the beauty of it. 
-          </p>
-          <p>
-            So why start a blog? Because it's your space. It's a place where you can be yourself, create, and leave a lasting impact. Whether you're a beginner or a seasoned writer, blogging is a journey that allows you to continuously grow and evolve.
-          </p>
-        </div>
-    
-        <!-- Another Quote Section -->
-        <blockquote class="quote">
-          "Success is not final, failure is not fatal: It is the courage to continue that counts."
-        </blockquote>
-        <p class="quote-author">- Winston Churchill</p>
-      </div>
+<main class="container">
+    <h1>All Posts</h1>
+
+    <% if (posts && posts.length > 0) { %>
+        <% posts.forEach(post => { %>
+            <div class="post">
+                <h2><%= post.title %></h2>
+                <p><%= post.body %></p>
+
+                <form action="/edit-post/<%= post.id %>" method="GET" style="display:inline;">
+                    <button type="submit" class="btn btn-primary">Edit</button>
+                </form>
+
+                <form action="/delete-post/<%= post.id %>" method="POST" style="display:inline;">
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            </div>
+            <hr>
+        <% }) %>
+    <% } else { %>
+        <p>No posts yet! <a href="/create-post">Create a new post</a></p>
+    <% } %>
+
+    <a href="/create-post" class="btn btn-success">Create New Post</a>
 </main>
 <%- include('partials/footer') %>
